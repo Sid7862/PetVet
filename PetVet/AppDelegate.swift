@@ -7,9 +7,10 @@
 //
 
 import UIKit
+import FBSDKLoginKit
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate  {
 
     var window: UIWindow?
     
@@ -20,6 +21,47 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         sleep(2);
         return true
     }
+    
+//    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool
+//    {
+//          let handled : Bool
+//           handled = FBSDKApplicationDelegate .sharedInstance().application(application, open: url, sourceApplication: sourceApplication, annotation: annotation)
+//            // Add any custom logic here.
+//            return handled;
+//    }
+//
+//
+//
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        
+        let str_URL = url.absoluteString as NSString
+        
+        if str_URL.contains("2193041754077426")// put you id here
+            
+        
+//        fetched user: Optional({
+//        email = "sahibuddin@gmail.com";
+//        id = 2193041754077426;
+//        name = "Ahmed Sahib";
+//        })
+            
+        {
+            return FBSDKApplicationDelegate.sharedInstance().application(
+                app,
+                open: url as URL!,
+                sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as! String,
+                annotation: options[UIApplicationOpenURLOptionsKey.annotation])
+        }
+        
+        
+        return FBSDKApplicationDelegate.sharedInstance().application(
+            app,
+            open: url as URL!,
+            sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as! String,
+            annotation: options[UIApplicationOpenURLOptionsKey.annotation])
+        
+    }
+    
 
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
